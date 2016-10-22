@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+main()
+{
+	int u, v, n, i, j, count, w, k[10];
+	int dist[10] = {0}, min, mincost = 0, cost[10][10];
+
+	cout<<"Enter the number of nodes :: ";
+	cin>>n;
+	
+	cout<<"Enter the adjacency matrix ::\n";
+	for(i = 1;i <= n; i++)
+	{
+		for(j = 1; j <= n; j++)
+		{
+			cout<<"cost["<<i<<"]["<<j<<"] :: ";
+			cin>>cost[i][j];
+			if(cost[i][j] == 0)
+				cost[i][j] = 999;
+		}
+	}
+
+	cout<<"Enter the source vertex :: ";
+	cin>>v;
+	
+	for(i = 1; i <= n; i++)
+        {
+		k[i] = 0;
+		dist[i] = cost[v][i];
+	}
+	
+	count = 2;
+	while(count < n)
+	{
+		min = 999;
+		for(w = 1; w <= n; w++)
+			if(dist[w] < min && !k[w])
+			{
+				min = dist[w];
+				u = w;
+			}
+		k[u] = 1;
+		count++;
+		for(w = 1; w <= n; w++)
+			if((dist[u]+cost[u][w] < dist[w]) && !k[w])
+				dist[w] = dist[u] + cost[u][w];
+	}
+	
+	for(i = 1; i <= n; i++)
+		if(i != v)
+			cout<<v<<"->"<<i<<" cost = "<<dist[i]<<"\n";
+      }
