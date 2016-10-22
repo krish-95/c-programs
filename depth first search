@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+void Dfs(int v);
+int n, vis[10] = {0}, adj[10][10];;
+main()
+{
+	int b, i, j;	
+
+	cout<<"Enter the number of nodes :: ";
+	cin>>n;
+	
+	cout<<"Enter the adjacency matrix ::\n";
+	for(i = 1;i <= n; i++)
+	{
+		for(j = 1; j <= n; j++)
+		{
+			cout<<"adj["<<i<<"]["<<j<<"] :: ";
+			cin>>adj[i][j];
+			if(adj[i][j] == 0)
+				adj[i][j] = 999;
+		}
+	}
+	
+	cout<<"The Depth First Search for the given graph is :: ";
+	Dfs(1);
+}
+
+void Dfs(int v)
+{
+	int j;
+	vis[v] = 1;
+	cout<<v<<"  ";
+	for(j = 1; j <= n; j++)
+	{
+		if(adj[v][j] != 999 && vis[j] != 1)
+		{
+			Dfs(j);
+		}
+	}
+}
