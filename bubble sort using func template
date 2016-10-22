@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+template<class T>
+void get(T a[],int n)
+{
+int i;
+for(i=0;i<n;i++)
+cin>>a[i];
+}
+template<class T>
+void print(T a[],int n)
+{
+int i;
+for(i=0;i<n;i++)
+cout<<a[i];
+cout<<"\n";
+}
+template<class T>
+void bubblesort(T a[],int n)
+{
+int i,j;
+T t;
+for(i=0;i<n-1;i++)
+{
+for(j=i+1;j<n;j++)
+{if(a[i]>a[j])
+{
+t=a[i];
+a[i]=a[j];
+a[j]=t;
+}
+}
+}
+}
+main()
+{
+int a[10],n,ch;
+float b[10];
+char c[10];
+do
+{
+cout<<"1.integer sort\t 2.float sort\t 3.char sort\t";
+cout<<"enter choice:";
+cin>>ch;
+switch(ch)
+{
+case 1:
+cout<<"enter the number of elements:";
+cin>>n;
+get(a,n);
+bubblesort(a,n);
+print(a,n);
+break;
+case 2:
+cout<<"enter the number of elements:";
+cin>>n;
+get(b,n);
+bubblesort(b,n);
+print(b,n);
+break;
+case 3:
+cout<<"enter the number of elements:";
+cin>>n;
+get(c,n);
+bubblesort(c,n);
+print(c,n);
+break;
+}
+}
+while(ch<4);
+}
