@@ -1,0 +1,155 @@
+#include<iostream>
+using namespace std;
+template<class t>
+class stack
+{
+int top;
+t a[10];
+public:
+stack()
+{
+top=-1;
+}
+void push(t e)
+{
+if(top==9)
+cout<<"FULL STACK"<<"\n";
+else
+{
+top++;
+a[top]=e;
+}
+}
+void pop()
+{
+if(top==-1)
+cout<<"EMPTY STACK"<<"\n";
+else
+top--;
+}
+t stop()
+{
+
+if(top==-1)
+cout<<"EMPTY STACK"<<"\n";
+else
+return a[top];
+}
+void print()
+{
+int i;
+for(i=top;i>=0;i--)
+cout<<a[i]<<"\n";
+}
+};
+int main()
+{
+stack<int> si;
+stack<float> sf;
+stack<char> sc;
+int ch1,ch2,ch3,n,e1;
+float e2;
+char e3;
+do
+{
+cout<<"1.INTEGER	2.FLOAT		3.CHAR:"<<"\n";
+cout<<"enter the choice:"<<"\n";
+cin>>n;
+switch(n)
+{
+case 1:
+do
+{
+cout<<"1.push    2.pop	3.top	4.print"<<"\n";
+cout<<"enter the choice:"<<"\n";
+cin>>ch1;
+switch(ch1)
+{
+case 1:
+cout<<"enter the elements:"<<"\n";
+cin>>e1;
+si.push(e1);
+break;
+case 2:
+si.pop();
+break;
+case 3:
+int q;
+q=si.stop();
+cout<<q;
+break;
+case 4:
+cout<<"the elements:"<<"\n";
+si.print();
+break;
+default:
+break;
+}
+}while(ch1<5);
+break;
+case 2:
+do
+{
+cout<<"1.push	2.pop	3.top	4.print"<<"\n";
+cout<<"enter the choice:"<<"\n";
+cin>>ch2;
+switch(ch2)
+{
+case 1:
+cout<<"enter the elements:"<<"\n";
+cin>>e2;
+sf.push(e2);
+break;
+case 2:
+sf.pop();
+break;
+case 3:
+int q;
+q=sf.stop();
+cout<<q;
+break;
+case 4:
+cout<<"the elements:"<<"\n";
+sf.print();
+break;
+default:
+break;
+}
+}while(ch2<5);
+break;
+case 3:
+do
+{
+cout<<"1.push	2.pop	3.top	4.print"<<"\n";
+cout<<"enter the choice:"<<"\n";
+cin>>ch3;
+switch(ch3)
+{
+case 1:
+cout<<"enter the elements:"<<"\n";
+cin>>e3;
+sc.push(e3);
+break;
+case 2:
+sc.pop();
+break;
+case 3:
+int q;
+q=sc.stop();
+cout<<q;
+break;
+case 4:
+cout<<"the elements:"<<"\n";
+sc.print();
+break;
+default:
+break;
+}
+}while(ch3<5);
+break;
+default:
+break;
+}
+}while(n<4);
+return 0;
+}
