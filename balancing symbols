@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+char stack[20];
+int top;
+void push(char ch)
+{
+stack[++top] = ch;
+}
+char pop()
+{
+return stack[top--];
+}
+int isempty()
+{
+return top == -1;
+}
+int main()
+{
+char exp[10];
+char p;
+char *e;
+e = exp;
+top = -1;
+cout<<"Enter the expression :: ";
+cin>>exp;
+while(*e != '\0')
+{
+if((*e == '[') || (*e == '{') || (*e == '('))
+push(*e);
+else if((*e == ']') || (*e == '}') || (*e == ')'))
+{
+if(isempty())
+{
+cout<<"NO LEFT PARENTHESIS!!!\n";
+return 0;
+}
+else
+{
+p = pop();
+if((p != '(' && *e == ')') || (p != '{' && *e == '}') || (p != '[' && *e == ']'))
+{
+cout<<"MISMATCH PARENTHESIS!!!\n";
+return 0;
+}
+}
+}
+e++;
+}
+if(!isempty())
+{
+cout<<"NO RIGHT PARENTHESIS!!!\n";
+return 0;
+}
+cout<<"BALANCED PARENTHESIS!!!\n";
+}
