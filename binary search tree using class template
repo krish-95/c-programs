@@ -1,0 +1,172 @@
+#include<iostream>
+using namespace std;
+template<class T>
+class bn
+{
+T e;
+bn* left;
+bn* right;
+public:
+bn(T &x,bn* l,bn* r)
+{
+e=x;
+left =l;
+right =r;
+}
+friend class bst<T>;
+};
+template <class T>
+class bst
+{
+public:
+bn<T>* root;
+public:
+void insert(T &x,bn<T> *&t);
+void remove(T &x,bn<T> *&t);
+bn<T>* find(T &x,bn<T> *t);
+bn<T>* findmin(bn<T> *t);
+bn<T>* findmax(bn<T> *t);
+void inorder(bn<T> *t);
+void preorder(bn<T> *t);
+void postorder(bn<T> *t);
+};
+template<class T>
+void bst<T>::insert(T &x,bn<T> *&t)
+{
+if(t==NULL)
+t= new bn<T>(x,NULL,NULL);
+else if(x<t->e)
+insert(x,t->left);
+else if(x>t->e)
+insert(x,t->right);
+else 
+cout<<"element already exists";
+}
+template<class T>
+void bst<T>::remove(T &x,bn<T> *&t)
+{
+bn<T> *tmp;
+if(t==NULL)
+return;
+else if(x<t->e)
+remove(x,t->left);
+else if(x>t->e)
+remove(x,t->right);
+else if(t->l!=NULL&&t->r!=NULL)
+{
+tmp=findmin(t->r);
+t->e=tmp->e;
+remove(tmp->e,t->r);
+}
+else
+{
+tmp=t;
+t=(t->left!=NULL)?t->left:t->right;
+}}
+template <class T>
+bn<T>* bst<T>::find(T &x,bn<T> *t)
+{
+if(t==NULL)
+return NULL;
+else if(x<t->e)
+return find(x,t->left);
+else if(x>t->e)
+return find(x,t->right);
+else 
+return t;
+}
+template <class T>
+bn<T>* bst<T>::findmin(bn<T> *t)
+{
+if(t==NULL)
+return NULL;
+else if(t->left==NULL )
+return t;
+return findmin(t->left);
+}
+template <class T>
+bn<T>* bst<T>::findmax(bn<T> *t)
+{
+if(t==NULL)
+return NULL;
+else if(t->right==NULL)
+return t;
+return findmin(t->right);
+}
+template <class T>
+void bst<T>::inorder(bn<T> *t)
+{
+if(t!=NULL)
+{
+inorder(t->left);
+cout<<t->e;
+cout<<"\n";
+inorder(t->right);
+}}
+template <class T>
+void bst<T>::preorder(bn<T> *t)
+{
+if(t!=NULL)
+{
+cout<<t->e;
+cout<<"\n";
+preorder(t->left);
+preorder(t->right);
+}}
+template <class T>
+void bst<T>::postorder(bn<T> *t)
+{
+if(t!=NULL)
+{
+postorder(t->left);
+postorder(t->right);
+cout<<t->e;
+cout<<"\n";
+}}
+main()
+{
+bst<int> b;
+int *f;
+b.root=NULL;
+int ch,e;
+do
+{
+cout<<"1:insert \n2:delete \n3:find\n4:findmin\n5:findmax\n6:inorder traversal\n7:preorder traversal\n8:postorder traversal\nenter the choice:";cin>>ch;
+switch(ch)
+{case 1:
+      cout<<"enter the element to be inserted:";
+      cin>>e;
+      b.insert(e,root);
+      break;
+case 2:
+      cout<<"enter the element to be deleted:";
+      cin>>e;
+      break;
+case 3:
+      cout<<"enter the element to find:";
+      cin>>e;
+      f=b.find(e,root);
+      if(f==NULL)
+      cout<<"element not found";
+      else
+      cout<<"element found";
+      break;
+case 4:
+      e=b.findmin(root);
+      cout<<"the minimum element is"<<e;
+      break;
+case 5:
+      e=b.findmax(root);
+      cout<<"the maximum element in the tree is"<<e;
+      break;
+case 6:
+      b.inorder(root);
+      break;
+case 7:
+     b.preorder(root);
+     break;
+case 8:
+     b.postorder(root);
+     break;
+}}while(ch<=8);
+}
