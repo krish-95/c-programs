@@ -1,0 +1,46 @@
+#include<iostream>
+#include<fstream>
+#include<iomanip>
+using namespace std;
+class employee
+{
+char name[10];
+char salary[10];
+public:
+void getdata()
+{
+cout<<"Enter the name of the employee :: ";
+cin>>name;
+cout<<"Enter the salary :: ";
+cin>>salary;
+}
+void putdata()
+{
+cout<<"\nNAME :: "<<name;
+cout<<"\t"<<"SALARY:: "<<salary;
+}
+};
+main()
+{
+employee s[10];
+employee s2[10];
+ofstream ofile;
+int n, i;
+ofile.open("out.txt");
+cout<<"Enter the number of employees :: ";
+cin>>n;
+for(i = 0; i < n; i++)
+{
+s[i].getdata();
+ofile.write((const char *)(&s[i]), sizeof(s[i]));
+}
+ofile.close();
+fstream ifile;
+ifile.open("out.txt");
+for(i = 0; i < n; i++)
+{
+ifile.read((char *)(&s2[i]), sizeof(s2[i]));
+s2[i].putdata();
+}
+ifile.close();
+}
