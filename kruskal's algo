@@ -1,0 +1,71 @@
+#include<iostream.h>
+#include<stdlib.h>
+typedef struct
+{
+int node1;
+int node2;
+int wt;
+}edge;
+void sortedges(edge a[],int n)
+{
+int i,j;
+edge temp;
+for(i=0;i<n;i++)
+for(j=i+1;j<n;j++)
+if(a[i].wt>a[j].wt)
+{
+temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+int checkcycle(int p[],int i,int j)
+{
+int v1,v2;
+v1=i;
+v2=j;
+while(p[i]>-1)
+i=p[i];
+while(p[j]>-1)
+j=p[j];
+if(i!=j)
+{
+p[j]=i;
+cout<<v1<<"\t"<<v2<<"\n";
+return 1;
+}
+return 0;
+}
+int main()
+{
+edge e[100];
+int parent[100];
+int i,j,k=1,m,n,cost=0;
+clrscr();
+cout<<"\nEnter the no. of nodes:";
+cin>>n;
+for(i=0;i<n;i++)
+parent[i]=-1;
+i=0;
+cout<<"\nEnter the no. of edges:";
+cin>>m;
+for(i=0;i<m;i++)
+{
+cout<<"\nEnter the edges and weight:";
+cin>>e[i].node1>>e[i].node2>>e[i].wt;
+}
+sortedges(e,m);
+cout<<"\n\nEdges of the tree";
+i=0;
+while(k<n)
+{
+if(checkcycle(parent,e[i].node1,e[i].node2))
+{k++;
+cost=cost+e[i].wt;
+i++;
+}
+}
+cout<<"cost="<<cost;
+getch();
+return 0;
+}
