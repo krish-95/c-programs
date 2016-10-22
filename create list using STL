@@ -1,0 +1,109 @@
+#include<iostream>
+#include<list>
+#include<algorithm>
+using namespace std;
+
+main()
+{
+int n, e, ch, ich, i, p, s;
+list<int> l1,l2;
+list<int>:: iterator itr;
+do
+{
+cout<<"\n1. CREATE\n2. INSERT\n3. DELETE\n4. MERGE\n5. DISPLAY\n6. SORT\n7. SEARCH\nEnter the choice :: ";
+cin>>ch;
+switch(ch)
+{
+case 1:
+cout<<"Enter the number of elements to be created :: ";
+cin>>n;
+for(i = 0 ; i < n; i++)
+{
+cout<<"Enter the element to be inserted :: ";
+cin>>e;
+l1.push_back(e);
+}
+break;
+case 2:
+cout<<"1. INSERT AT FRONT\n2. INSERT AT LAST\n3. INSERT AT MIDDLE\nEnter the insertion choice :: ";
+cin>>ich;
+switch(ich)
+{
+case 1:
+cout<<"Enter the element to be inserted :: ";
+cin>>e;
+l1.push_front(e);
+break;
+case 2:
+cout<<"Enter the element to be inserted :: ";
+cin>>e;
+l1.push_back(e);
+break;
+case 3:
+cout<<"Enter the element to be inserted :: ";
+cin>>e;
+cout<<"Enter the position of insertion :: ";
+cin>>p;
+itr = l1.begin();
+for(i = 0; i < p-1; i++)
+itr++;
+l1.insert(itr, 1, e);
+break;
+default:
+cout<<"INVALID OPTION!!!\n\n";
+}
+break;
+case 3:
+cout<<"1. DELETE AT FRONT\n2. DELETE AT LAST\n3. DELETE AT MIDDLE\nEnter the deletion choice :: ";
+cin>>ich;
+switch(ich)
+{
+case 1:
+l1.pop_front();
+break;
+case 2:
+l1.pop_back();
+break;
+case 3:
+cout<<"Enter the position of the element to be deleted :: ";
+cin>>p;
+itr = l1.begin();
+for(i = 0; i < p-1; i++)
+itr++;
+l1.erase(itr);
+break;
+default:
+cout<<"INVALID OPTION!!!\n\n";
+}
+break;
+case 4:
+cout<<"Enter the number of elements to be created for list 2:: ";
+cin>>n;
+for(i = 0 ; i < n; i++)
+{
+cout<<"Enter the element to be inserted :: ";
+cin>>e;
+l2.push_back(e);
+}
+l1.merge(l2);
+break;
+case 5:
+for(itr = l1.begin(); itr != l1.end(); itr++)
+cout<<*itr<<"  ";
+cout<<"\n";
+break;
+case 6:
+l1.sort();
+break;
+case 7:
+cout<<"Enter the element to be searched :: ";
+cin>>e;
+bool x = binary_search(l1.begin(), l1.end(), e);
+if(x == true)
+cout<<"Element found\n";
+else
+cout<<"Element not found\n";
+break;
+}
+}while(ch<8);
+}
